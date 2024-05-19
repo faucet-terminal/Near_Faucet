@@ -1,0 +1,22 @@
+{
+  "name": "near-faucet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "node script/index.js",
+    "start": "node script/index.js && node --env-file=.env dist/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/express": "^4.17.21",
+    "body-parser": "^1.20.2",
+    "esbuild": "^0.21.3",
+    "express": "^4.19.2",
+    "near-api-js": "^4.0.1"
+  }
+}
