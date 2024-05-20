@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "node script/index.js",
-    "start": "node script/index.js && node --env-file=.env dist/bundle.js",
+    "build": "node script",
+    "start": "node script && node --env-file=.env dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
