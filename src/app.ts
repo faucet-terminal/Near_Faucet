@@ -1,27 +1,23 @@
-import bodyParser from 'body-parser';
-import express, { type Application } from 'express';
-import MainRouter from './routes';
-import path from 'path';
-import ErrorHandlers from './handlers/error.handlers';
-import GetFauceltNetworkdConfig from './config/faucet.config';
+import bodyParser from "body-parser";
+import express, { type Application } from "express";
+import MainRouter from "./routes";
+import { GlobalErrorHandler } from "./handlers/error.handlers";
 
-export default async function InitializeApplication() {
+export default function InitializeApplication() {
   const app: Application = express();
 
   // 路由配置
   app.use(bodyParser.json());
-  app.use('/api', MainRouter);
-
-  // 测试界面
-  const publicPath = path.resolve(__dirname, '..', 'public');
-  app.use(express.static(publicPath));
+  app.use("/near", MainRouter);
 
   // 全局异常处理
-  ErrorHandlers(app);
-
-  // 全局配置写入
-  const faucetConfig = await GetFauceltNetworkdConfig();
-  app.set('nearConfig', faucetConfig);
+  app.use(GlobalErrorHandler);
+  app.use((req, resp, next) => {
+    resp.status(404).json({
+      success: false,
+      message: "404 not found",
+    });
+  });
 
   return app;
 }
