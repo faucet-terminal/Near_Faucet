@@ -5,7 +5,7 @@ import {
   type NextFunction,
 } from "express";
 import { connect, utils } from "near-api-js";
-import GetFaucetNetworkConfig from "../config/faucet.config";
+import GetFaucetNetworkConfig, { GetExploerUrl } from "../config/faucet.config";
 
 const FaucetRoutes: Router = Router();
 const FAUCET_ACCOUNT_ID = process.env.FAUCET_ACCOUNT_ID || "";
@@ -35,16 +35,17 @@ FaucetRoutes.post(
           console.error("Failed to GetNetworkConfig.", network);
           throw new Error("Failed to GetNetworkConfig.");
         }
-        respBody["explorer_url"] = nearConfig.explorerUrl;
         return connect(nearConfig);
       })
       .then((connection) => connection.account(FAUCET_ACCOUNT_ID))
       .then((account) => account.sendMoney(address, NEAR_TOKEN_AMOUNT))
       .then((result) => {
         console.log(`Transfer ${NEAR_TOKEN_AMOUNT} yoctoNEAR to ${address}`);
+        const tx_id = result?.transaction_outcome?.id;
         resp.status(200).json({
           ...respBody,
-          tx_id: result?.transaction_outcome?.id,
+          explorer_url: GetExploerUrl(network, tx_id),
+          tx_id,
         });
       })
       .catch(next);

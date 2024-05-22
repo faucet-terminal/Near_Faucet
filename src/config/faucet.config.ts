@@ -64,3 +64,7 @@ export default async function GetFaucetNetworkConfig(
   }
   return NetworkConfigCache[networkId];
 }
+
+export function GetExploerUrl(networkId: string, transactionId: string) {
+  return GetNetWorkConfig(networkId)?.explorerUrl + `/txns/${transactionId}`;
+}
