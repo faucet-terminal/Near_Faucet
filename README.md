@@ -14,6 +14,7 @@ npm run build
 #### 启动命令
 
 ```
+touch .env #根据.env.example修改环境变量
 node --env-file .env dist/bundle.js
 ```
 
@@ -42,7 +43,7 @@ http://localhost:8080/near/request
 {
     "success":true,
     "message":"",
-    "explorer_url":"https://testnet.nearblocks.io",
+    "explorer_url":"https://testnet.nearblocks.io/txn/7pRR3YCsdnAaiFL5vPnJcyS9V4XBDGNxPnio2z1TLYFa",
     "tx_id":"7pRR3YCsdnAaiFL5vPnJcyS9V4XBDGNxPnio2z1TLYFa"
 }
 ```
