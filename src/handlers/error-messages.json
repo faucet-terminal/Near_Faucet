@@ -1,0 +1,7 @@
+{
+    "AccountDoesNotExist": "Account doesn't exist.",
+    "NotEnoughBalance": "Insufficient balance.",
+    "InvalidSignature": "Failed to execute transaction.",
+    "RetriesExceeded": "Failed to execute transaction.",
+    "NetworkError": "Failed to connect near network."
+}
