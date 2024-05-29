@@ -7,24 +7,24 @@ describe("POST /near/request", () => {
   it("should respond with an error message for unsupport network.", async () => {
     const response = await supertest(app)
       .post("/near/request")
-      .send({ address: "test-address", network: "net" });
+      .send({ address: "test-address", network: "net", amount: "30.01" });
 
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
     expect(response.body).toEqual({
       success: false,
-      message: "server is unavailable",
+      message: "Failed to connect near network.",
     });
   });
 
   it("should respond with an error message for invalid input", async () => {
     const response = await supertest(app)
       .post("/near/request")
-      .send({ address: "", network: "" });
+      .send({ address: "", network: "", amount: "30.01" });
 
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
       success: false,
-      message: "address or network is required.",
+      message: "address/network/amount is required.",
     });
   });
 });
